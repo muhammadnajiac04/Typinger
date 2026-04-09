@@ -1,164 +1,140 @@
-# ⌨️ TypingFlow Pro – Advanced Typing Speed Tester
+# ⌨️ TypingFlow Pro – Advanced Typing Speed Analyzer
 
 ## 📌 Overview
 
-TypingFlow Pro is a modern and interactive typing speed test application designed to improve typing performance through real-time feedback, accuracy tracking, and performance analytics.
+TypingFlow Pro is a modern typing speed analyzer designed to enhance typing performance through real-time feedback, accuracy tracking, and visual performance insights.
 
-Unlike basic typing tools, it provides a dynamic typing experience with live cursor tracking, intelligent error detection, and visual performance insights.
-
----
-
-## 🚀 Live Demo
-
-🔗 https://llab.netlify.app/
+It delivers a focused and distraction-free environment where users can practice typing while receiving immediate feedback on their speed and precision.
 
 ---
 
-## 🎯 Key Objectives
+## 🎯 Purpose
+
+The goal of this project is to create an efficient and engaging typing practice tool that helps users:
 
 * Improve typing speed (WPM)
-* Enhance typing accuracy
-* Provide real-time performance feedback
-* Track progress visually over time
+* Increase accuracy
+* Build consistency through repetition
+* Understand performance trends over time
 
 ---
 
 ## ✨ Core Features
 
-### ⚡ Real-Time Typing Engine
+### ⚡ Real-Time Typing Feedback
 
 * Character-by-character validation
-* Instant feedback (correct / incorrect highlighting)
-* Smooth cursor tracking
+* Instant visual feedback for correct and incorrect inputs
+* Smooth cursor tracking system
 
-### ⏱️ Multiple Time Modes
+### ⏱️ Configurable Test Duration
 
-* 15 seconds
-* 30 seconds
-* 60 seconds
+* Multiple time modes: 15s, 30s, 60s
+* Dynamic timer with auto-start on first input
 
 ### 📊 Performance Analytics
 
 * Words Per Minute (WPM) calculation
 * Accuracy percentage tracking
-* Live performance graph using Chart.js
+* Real-time performance graph visualization
 
 ### 🧠 Smart Progress Tracking
 
-* Stores best WPM using LocalStorage
-* Displays personal best score
+* Best score stored using LocalStorage
+* Persistent performance reference
 
-### 🎨 Modern UI/UX
+### 🎨 User Experience
 
 * Minimalist dark theme
+* Clean and distraction-free interface
 * Smooth animations and transitions
-* Distraction-free typing environment
 
-### 🔁 Game Controls
+### 🔁 Interaction Controls
 
-* Restart anytime (Esc key)
-* Auto-focus typing input
-* Instant retry system
-
----
-
-## 🧠 How It Works
-
-1. Random words are generated dynamically
-2. User types the text in real-time
-3. Each keystroke is validated:
-
-   * Correct → normal highlight
-   * Incorrect → error highlight
-4. Timer starts on first input
-5. WPM is calculated using:
-
-```text id="d4j2f2"
-WPM = (characters typed / 5) / time (minutes)
-```
-
-6. Results are displayed with:
-
-   * WPM score
-   * Accuracy %
-   * Performance graph
+* Instant restart functionality
+* Auto-focus input system
+* Keyboard-driven interaction
 
 ---
 
-## 🛠️ Technologies Used
+## 🧠 System Design & Logic
 
-* HTML5
-* CSS3 (Custom variables + modern styling)
-* JavaScript (Vanilla JS)
-* Chart.js (for performance visualization)
-* LocalStorage (for saving best score)
+### Typing Engine
+
+* Generates dynamic word sequences
+* Tracks user input character-by-character
+* Maintains current cursor position
+
+### Validation System
+
+* Compares each typed character with target text
+* Marks:
+
+  * Correct input
+  * Incorrect input (error tracking)
+
+### Performance Calculation
+
+* WPM is calculated based on typed characters over time
+* Accuracy is derived from correct vs incorrect inputs
+
+### Data Handling
+
+* Stores best WPM locally in the browser
+* Maintains WPM history for graph visualization
+
+---
+
+## 🛠️ Technology Stack
+
+* **HTML5** – Structure
+* **CSS3** – Styling and theming
+* **JavaScript (Vanilla)** – Core logic and interaction
+* **Chart.js** – Performance graph visualization
+* **LocalStorage** – Persistent data storage
 
 ---
 
 ## 📂 Project Structure
 
-```id="k0x9rj"
-project-folder/
+```id="c6s1rc"
+project/
 │
-├── index.html      # Main application
-├── style.css       # UI styling (if separated)
-├── script.js       # Typing logic
-└── README.md       # Documentation
+├── index.html        # Main application structure
+├── style.css         # UI styling and theme
+├── script.js         # Typing logic and functionality
+└── README.md         # Documentation
 ```
 
 ---
 
-## ▶️ How to Run Locally
+## 💡 Design Philosophy
 
-### Step 1: Clone repository
-
-```bash id="x3xkpn"
-git clone <your-repo-link>
-```
-
-### Step 2: Open folder
-
-```bash id="tx9c5j"
-cd project-folder
-```
-
-### Step 3: Run in browser
-
-```bash id="6p9m1l"
-start index.html
-```
+* Simplicity over complexity
+* Real-time feedback for learning efficiency
+* Minimal UI for maximum focus
+* Performance-driven interaction design
 
 ---
 
-## 📈 Future Improvements
+## 📈 Future Enhancements
 
 * Custom text input mode
-* Multiplayer typing competition
-* User accounts & progress history
+* Multiplayer typing sessions
 * Leaderboard system
-* Sound feedback for typing
-* Mobile optimization
-
----
-
-## 💡 What Makes This Project Stand Out
-
-* Real-time typing feedback system
-* Performance visualization (graph-based)
-* Clean and distraction-free UI
-* Efficient DOM manipulation and event handling
-* Practical use of LocalStorage
+* User authentication and history tracking
+* Mobile responsiveness improvements
 
 ---
 
 ## 👨‍💻 Author
 
-Developed as an advanced frontend project focused on performance tracking and user interaction.
+Developed as an advanced frontend project focused on performance tracking, real-time interaction, and clean UI design.
 
 ---
 
 ## 📄 License
 
-This project is for educational and personal use.
+This project is intended for educational and demonstration purposes.
 
 ---

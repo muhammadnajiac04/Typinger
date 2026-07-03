@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TypingFlow Pro | Custom Challenges</title>
@@ -17,7 +18,7 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: 'Roboto Mono', monospace;
+            font-family: 'Courier Prime', monospace;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,7 +29,7 @@
 
         .container { width: 90%; max-width: 900px; position: relative; }
 
-        /* Configuration Bar */
+        /* Configuration Bar 
         #config-bar {
             display: flex;
             justify-content: center;
@@ -51,7 +52,7 @@
         }
 
         .time-opt:hover { color: var(--text-color); }
-        .time-opt.active { color: var(--main-color); font-weight: bold; }
+        .time-opt.active { color: var(--main-color); font-weight: bold; }*/
 
         #header {
             display: flex;
@@ -114,6 +115,79 @@
             justify-content: center;
             align-items: center;
         }
+        .settings{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+    margin-bottom:30px;
+}
+
+.setting-box{
+    width:380px;
+    background:rgba(0,0,0,.15);
+    border-radius:10px;
+    padding:12px 18px;
+}
+
+.setting-title{
+    color:#646669;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:10px;
+    text-align:center;
+}
+
+.setting-options{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+
+.time-opt,
+.level-opt{
+    color:#646669;
+    cursor:pointer;
+    padding:4px 10px;
+    border-radius:6px;
+    transition:.2s;
+}
+
+.time-opt:hover,
+.level-opt:hover{
+    color:#d1d0c5;
+}
+
+.time-opt.active,
+.level-opt.active{
+    color:#e2b714;
+    background:#2c2e31;
+}
+.signature{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
+.signature p{
+    margin: 0 0 2px 0;
+    color: #646669;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.signature img{
+    width: 140px;      /* Adjust as needed */
+    height: auto;
+    display: block;
+}
 
         .modal { width: 85%; max-width: 800px; text-align: center; }
         .stat-grid { display: flex; justify-content: center; gap: 40px; margin-bottom: 20px; }
@@ -124,12 +198,36 @@
 <body>
 
 <div class="container">
-    <div id="config-bar">
-        <span style="color:var(--sub-color); font-size: 0.8rem; margin-right: 10px; align-self: center;">TIME:</span>
-        <div class="time-opt" onclick="setTime(15)">15s</div>
-        <div class="time-opt active" onclick="setTime(30)">30s</div>
-        <div class="time-opt" onclick="setTime(60)">60s</div>
+<div class="settings">
+
+    <div class="setting-box">
+
+        <div class="setting-title">Time</div>
+
+        <div class="setting-options">
+            <span class="time-opt active" onclick="setTime(15,this)">15s</span>
+            <span class="time-opt" onclick="setTime(30,this)">30s</span>
+            <span class="time-opt" onclick="setTime(60,this)">60s</span>
+            <span class="time-opt" onclick="setTime(120,this)">120s</span>
+        </div>
+
     </div>
+
+    <div class="setting-box">
+
+        <div class="setting-title">Difficulty</div>
+
+        <div class="setting-options">
+            <span class="level-opt active" onclick="setLevel('beginner',this)">Easy</span>
+            <span class="level-opt" onclick="setLevel('intermediate',this)">Medium</span>
+            <span class="level-opt" onclick="setLevel('advanced',this)">Hard</span>
+            <span class="level-opt" onclick="setLevel('programming',this)">Code</span>
+        </div>
+
+    </div>
+
+</div>
+
 
     <div id="header">
         <div class="timer" id="timer">30</div>
@@ -176,35 +274,111 @@
     let wpmHistory = [];
     let chartInstance = null;
 
+    function setTime(seconds, element){
+
+    if(startTime) return;
+
+    selectedDuration = seconds;
+    timeLeft = seconds;
+    timerDisplay.innerText = seconds;
+
+    document.querySelectorAll(".time-opt").forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    element.classList.add("active");
+
+    resetGame();
+}
     // Load High Score
     function updateBestDisplay() {
         document.getElementById('best-display').innerText = `Best: ${localStorage.getItem('bestWPM') || 0} WPM`;
     }
     updateBestDisplay();
 
-    function setTime(seconds) {
-        if (startTime) return; // Prevent changing during test
-        selectedDuration = seconds;
-        timeLeft = seconds;
-        timerDisplay.innerText = seconds;
-        
-        document.querySelectorAll('.time-opt').forEach(opt => {
-            opt.classList.toggle('active', parseInt(opt.innerText) === seconds);
-        });
-        resetGame();
+function setLevel(level, element){
+
+    currentLevel = level;
+
+    document.querySelectorAll(".level-opt").forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    element.classList.add("active");
+
+    resetGame();
+}
+
+const beginnerWords = [
+    "the","and","cat","dog","car","run","sun","tree",
+    "book","pen","cup","box","red","blue","green",
+    "good","bad","big","small","home","food","bird",
+    "milk","fish","play","work","read","jump","walk","love"
+];
+
+const intermediateWords = [
+    "people","system","country","school","friend",
+    "family","future","project","computer","language",
+    "network","website","typing","keyboard","internet",
+    "important","beautiful","different","develop","company"
+];
+
+const advancedWords = [
+    "responsibility","communication","implementation",
+    "extraordinary","configuration","professional",
+    "administration","entrepreneur","architecture",
+    "authentication","optimization","documentation",
+    "understanding","transportation","identification"
+];
+
+const programmingWords = [
+    "function","const","let","return","class",
+    "object","array","boolean","string","number",
+    "while","for","switch","import","export",
+    "async","await","console","document",
+    "querySelector","addEventListener",
+    "python","javascript","html","css",
+    "react","node","django","mysql"
+];
+
+let currentLevel = "beginner";
+
+function generateText() {
+
+    let list;
+
+    switch(currentLevel){
+
+        case "beginner":
+            list = beginnerWords;
+            break;
+
+        case "intermediate":
+            list = intermediateWords;
+            break;
+
+        case "advanced":
+            list = advancedWords;
+            break;
+
+        case "programming":
+            list = programmingWords;
+            break;
+
+        default:
+            list = beginnerWords;
     }
 
-    function generateText() {
-        const chars = "eaitnslrou";
-        let words = [];
-        for (let i = 0; i < 150; i++) {
-            let word = "";
-            let len = Math.floor(Math.random() * 4) + 3;
-            for (let j = 0; j < len; j++) word += chars.charAt(Math.floor(Math.random() * chars.length));
-            words.push(word);
-        }
-        return words.join(" ");
+    let text = [];
+
+    for(let i=0;i<40;i++){
+        text.push(list[Math.floor(Math.random()*list.length)]);
     }
+
+    return text.join(" ");
+}
+
+
 
     function renderText() {
         targetText = generateText();
@@ -337,6 +511,9 @@
 
     renderText();
 </script>
-
+<div class="signature">
+    <p>Created By</p>
+    <img src="signature.png" alt="Muhammed Naji Signature">
+</div>
 </body>
 </html>
